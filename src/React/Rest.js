@@ -7,6 +7,9 @@ const Rest = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
+  // Extract token from URL query params
+  const token = new URLSearchParams(window.location.search).get('token');
+
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -18,13 +21,16 @@ const Rest = () => {
     }
 
     try {
-      const response = await axios.post('https://test-5-p6sv.onrender.com', {password});
+      const response = await axios.post(`https://test-5-p6sv.onrender.com`, { 
+        newPassword: password, 
+        confirmPassword 
+      });
       if (response.status === 200) {
         alert("Password reset successfully!");
       }
     } catch (error) {
-      console.error("Error resetting password:", error);
-      alert("An error occurred while resetting the password.");
+      console.error("Error resetting password:", error.response?.data || error.message);
+      alert(error.response?.data?.msg || "An error occurred while resetting the password.");
     }
   };
 
