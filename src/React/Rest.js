@@ -21,7 +21,7 @@ const Rest = () => {
     }
 
     try {
-      const response = await axios.post(`https://test-5-p6sv.onrender.com`, { 
+      const response = await axios.post(`https://test-5-p6sv.onrender.com/reset-password/${token}`, { 
         newPassword: password, 
         confirmPassword 
       });
